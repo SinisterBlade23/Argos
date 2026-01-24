@@ -1,0 +1,740 @@
+<?xml version="1.0"?>
+<robot
+  name="my_robot_description" xmlns:xacro = "https://www.ros.org/wiki/xacro">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.00096 -4.5476E-05 0.012904"
+        rpy="0 0 0" />
+      <mass
+        value="0.20827" />
+      <inertia
+        ixx="0.00023674"
+        ixy="5.4936E-07"
+        ixz="7.7494E-08"
+        iyy="0.00026889"
+        iyz="5.1216E-08"
+        izz="0.00047852" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="fl_shoulder">
+    <inertial>
+      <origin
+        xyz="0.0043625 -4.9278E-07 0.025798"
+        rpy="0 0 0" />
+      <mass
+        value="0.046113" />
+      <inertia
+        ixx="1.3355E-05"
+        ixy="4.4188E-10"
+        ixz="1.3752E-07"
+        iyy="1.5523E-05"
+        iyz="-1.3639E-10"
+        izz="8.5773E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fl_shoulder.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fl_shoulder.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fl_base_shoulder"
+    type="revolute">
+    <origin
+      xyz="0.0939000000000005 0.0673968233146481 0.0155620842110593"
+      rpy="1.57079632679491 0 1.57079632679489" />
+    <parent
+      link="base_link" />
+    <child
+      link="fl_shoulder" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+  <link
+    name="fl_femur">
+    <inertial>
+      <origin
+        xyz="-0.000980663369908541 -0.0447958949824971 0.0186701800364699"
+        rpy="0 0 0" />
+      <mass
+        value="0.0298055365775702" />
+      <inertia
+        ixx="4.6337668316187E-05"
+        ixy="6.1358526868979E-08"
+        ixz="9.65672931416064E-10"
+        iyy="7.42218666311901E-06"
+        iyz="8.01061773944908E-07"
+        izz="4.23251919783386E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fl_femur.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fl_femur.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fl_shoulder_femur"
+    type="revolute">
+    <origin
+      xyz="0.0279 0 0.015998"
+      rpy="0 1.5708 0" />
+    <parent
+      link="fl_shoulder" />
+    <child
+      link="fl_femur" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+  <link
+    name="fl_tibia">
+    <inertial>
+      <origin
+        xyz="0.0517745630940356 0.0041435032838093 -0.00726522566947085"
+        rpy="0 0 0" />
+      <mass
+        value="0.0350929464358555" />
+      <inertia
+        ixx="1.81928696189237E-06"
+        ixy="-2.40811061664445E-06"
+        ixz="2.59352783678858E-07"
+        iyy="5.85610830193973E-05"
+        iyz="7.5773139366918E-09"
+        izz="5.91505405370447E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fl_tibia.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fl_tibia.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fl_femur_tibia"
+    type="revolute">
+    <origin
+      xyz="0 -0.0900000000000843 0.0126249999999956"
+      rpy="3.14159265358979 0 3.14159265358979" />
+    <parent
+      link="fl_femur" />
+    <child
+      link="fl_tibia" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+  <link
+    name="fr_shoulder">
+    <inertial>
+      <origin
+        xyz="0.0043625 -4.9279E-07 0.025798"
+        rpy="0 0 0" />
+      <mass
+        value="0.046113" />
+      <inertia
+        ixx="1.3355E-05"
+        ixy="4.4189E-10"
+        ixz="1.3752E-07"
+        iyy="1.5523E-05"
+        iyz="-1.3639E-10"
+        izz="8.5773E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fr_shoulder.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fr_shoulder.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fr_base_shoulder"
+    type="revolute">
+    <origin
+      xyz="0.0939000000000001 -0.0674021508832441 0.0155620842110643"
+      rpy="-1.57079632679491 0 -1.5707963267949" />
+    <parent
+      link="base_link" />
+    <child
+      link="fr_shoulder" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+  <link
+    name="fr_femur">
+    <inertial>
+      <origin
+        xyz="0.0447958949819615 -0.000980663367950996 0.0186701800375426"
+        rpy="0 0 0" />
+      <mass
+        value="0.0298055365775699" />
+      <inertia
+        ixx="7.42218666311882E-06"
+        ixy="-6.13585268685657E-08"
+        ixz="-8.01061773944898E-07"
+        iyy="4.63376683161864E-05"
+        iyz="9.65672931434008E-10"
+        izz="4.23251919783382E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fr_femur.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fr_femur.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fr_shoulder_femur"
+    type="revolute">
+    <origin
+      xyz="0.02789999952295 0 0.0159978551142177"
+      rpy="1.57079632679489 0 1.5707963267949" />
+    <parent
+      link="fr_shoulder" />
+    <child
+      link="fr_femur" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+  <link
+    name="fr_tibia">
+    <inertial>
+      <origin
+        xyz="-0.051774563094025 0.004143503284044 -0.00748477433056993"
+        rpy="0 0 0" />
+      <mass
+        value="0.0350929464358555" />
+      <inertia
+        ixx="1.81928696191169E-06"
+        ixy="2.40811061687171E-06"
+        ixz="2.59352783682773E-07"
+        iyy="5.8561083019378E-05"
+        iyz="-7.57731393874348E-09"
+        izz="5.91505405370448E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fr_tibia.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/fr_tibia.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fr_femur_tibia"
+    type="revolute">
+    <origin
+      xyz="0.09 0 0.012625"
+      rpy="3.1416 0 -1.5708" />
+    <parent
+      link="fr_femur" />
+    <child
+      link="fr_tibia" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+  <link
+    name="bl_shoulder">
+    <inertial>
+      <origin
+        xyz="0.0043625 -4.9278E-07 0.0288"
+        rpy="0 0 0" />
+      <mass
+        value="0.046113" />
+      <inertia
+        ixx="1.3355E-05"
+        ixy="4.4188E-10"
+        ixz="1.3752E-07"
+        iyy="1.5523E-05"
+        iyz="-1.3639E-10"
+        izz="8.5773E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/bl_shoulder.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/bl_shoulder.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="bl_base_shoulder"
+    type="revolute">
+    <origin
+      xyz="-0.0889021447367624 0.0673366958544533 0.0154391055928195"
+      rpy="-1.57079632679489 0 1.57079632679489" />
+    <parent
+      link="base_link" />
+    <child
+      link="bl_shoulder" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+  <link
+    name="bl_femur">
+    <inertial>
+      <origin
+        xyz="0.00098066 0.044796 0.01867"
+        rpy="0 0 0" />
+      <mass
+        value="0.029806" />
+      <inertia
+        ixx="4.6338E-05"
+        ixy="6.1359E-08"
+        ixz="-9.6567E-10"
+        iyy="7.4222E-06"
+        iyz="-8.0106E-07"
+        izz="4.2325E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/bl_femur.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/bl_femur.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="bl_shoulder_femur"
+    type="revolute">
+    <origin
+      xyz="0.0278999995231527 0 0.0190000008046689"
+      rpy="0 1.5707963267949 0" />
+    <parent
+      link="bl_shoulder" />
+    <child
+      link="bl_femur" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+  <link
+    name="bl_tibia">
+    <inertial>
+      <origin
+        xyz="-0.051775 -0.0041435 -0.0072652"
+        rpy="0 0 0" />
+      <mass
+        value="0.035093" />
+      <inertia
+        ixx="1.8193E-06"
+        ixy="-2.4081E-06"
+        ixz="-2.5935E-07"
+        iyy="5.8561E-05"
+        iyz="-7.5773E-09"
+        izz="5.9151E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/bl_tibia.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/bl_tibia.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="bl_femur_tibia"
+    type="revolute">
+    <origin
+      xyz="0 0.0899999999999529 0.0126249999999949"
+      rpy="3.14159265358979 0 3.14159265358979" />
+    <parent
+      link="bl_femur" />
+    <child
+      link="bl_tibia" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+  <link
+    name="br_shoulder">
+    <inertial>
+      <origin
+        xyz="0.0043625 -4.9278E-07 0.0288"
+        rpy="0 0 0" />
+      <mass
+        value="0.046113" />
+      <inertia
+        ixx="1.3355E-05"
+        ixy="4.4188E-10"
+        ixz="1.3752E-07"
+        iyy="1.5523E-05"
+        iyz="-1.3639E-10"
+        izz="8.5773E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/br_shoulder.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/br_shoulder.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="br_base_shoulder"
+    type="revolute">
+    <origin
+      xyz="-0.0889021447367648 -0.0673420234230704 0.0154391055928281"
+      rpy="1.57079632679489 0 -1.5707963267949" />
+    <parent
+      link="base_link" />
+    <child
+      link="br_shoulder" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+  <link
+    name="br_femur">
+    <inertial>
+      <origin
+        xyz="-0.00098066 -0.044796 0.01867"
+        rpy="0 0 0" />
+      <mass
+        value="0.029806" />
+      <inertia
+        ixx="4.6338E-05"
+        ixy="6.1359E-08"
+        ixz="9.6567E-10"
+        iyy="7.4222E-06"
+        iyz="8.0106E-07"
+        izz="4.2325E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/br_femur.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/br_femur.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="br_shoulder_femur"
+    type="revolute">
+    <origin
+      xyz="0.0278999995231699 0 0.0190000008046445"
+      rpy="0 1.5707963267949 0" />
+    <parent
+      link="br_shoulder" />
+    <child
+      link="br_femur" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+  <link
+    name="br_tibia">
+    <inertial>
+      <origin
+        xyz="0.051775 -0.0041435 -0.0074848"
+        rpy="0 0 0" />
+      <mass
+        value="0.035093" />
+      <inertia
+        ixx="1.8193E-06"
+        ixy="2.4081E-06"
+        ixz="-2.5935E-07"
+        iyy="5.8561E-05"
+        iyz="7.5773E-09"
+        izz="5.9151E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/br_tibia.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://my_robot_description/meshes/br_tibia.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="br_femur_tibia"
+    type="revolute">
+    <origin
+      xyz="0 -0.09 0.012625"
+      rpy="3.1416 0 0" />
+    <parent
+      link="br_femur" />
+    <child
+      link="br_tibia" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="25"
+      velocity="10" />
+  </joint>
+</robot>
