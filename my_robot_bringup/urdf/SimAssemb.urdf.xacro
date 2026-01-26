@@ -3,7 +3,7 @@
   name="my_robot_bringup" xmlns:xacro = "https://www.ros.org/wiki/xacro">
 
     <xacro:include filename="robo_desc.xacro" />
-    <xacro:include filename="gazebo_plugins.xacro"/>
+    <!-- <xacro:include filename="gazebo_plugins.xacro"/> -->
     <xacro:include filename="ros2_control_plugins.xacro"/>
 
 
