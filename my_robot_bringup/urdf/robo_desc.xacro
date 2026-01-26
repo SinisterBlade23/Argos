@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:my_robot_description/urdf/SimAssemb.urdf.xacro
+<?xml version="1.0"?>
+<robot
+  name="my_robot_description" xmlns:xacro = "https://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="robo_desc.xacro" />
+    <xacro:include filename="gazebo_plugins.xacro"/>
+
+
+=======
+>>>>>>> 47866c5 (first)
 <?xml version="1.0"?>
 <robot
   name="my_robot_description" xmlns:xacro = "https://www.ros.org/wiki/xacro">
@@ -737,4 +750,8 @@
       effort="25"
       velocity="10" />
   </joint>
+<<<<<<< HEAD
+=======
+>>>>>>> f2bddc5 (added ros2_control interface and changed pkg name):my_robot_bringup/urdf/robo_desc.xacro
+>>>>>>> 47866c5 (first)
 </robot>
