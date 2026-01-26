@@ -7,7 +7,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    urdf_path = os.path.join(get_package_share_path('my_robot_description'),
+    urdf_path = os.path.join(get_package_share_path('my_robot_bringup'),
                              'urdf', 'SimAssemb.urdf.xacro')
     
     robot_description = ParameterValue(Command(['xacro ',urdf_path ]),value_type=str )

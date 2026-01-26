@@ -23,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/base_link.STL" />
+          filename="package://my_robot_bringup/meshes/base_link.STL" />
       </geometry>
       <material
         name="">
@@ -37,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/base_link.STL" />
+          filename="package://my_robot_bringup/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -63,7 +63,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fl_shoulder.STL" />
+          filename="package://my_robot_bringup/meshes/fl_shoulder.STL" />
       </geometry>
       <material
         name="">
@@ -77,7 +77,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fl_shoulder.STL" />
+          filename="package://my_robot_bringup/meshes/fl_shoulder.STL" />
       </geometry>
     </collision>
   </link>
@@ -121,7 +121,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fl_femur.STL" />
+          filename="package://my_robot_bringup/meshes/fl_femur.STL" />
       </geometry>
       <material
         name="">
@@ -135,7 +135,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fl_femur.STL" />
+          filename="package://my_robot_bringup/meshes/fl_femur.STL" />
       </geometry>
     </collision>
   </link>
@@ -179,7 +179,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fl_tibia.STL" />
+          filename="package://my_robot_bringup/meshes/fl_tibia.STL" />
       </geometry>
       <material
         name="">
@@ -193,7 +193,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fl_tibia.STL" />
+          filename="package://my_robot_bringup/meshes/fl_tibia.STL" />
       </geometry>
     </collision>
   </link>
@@ -237,7 +237,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fr_shoulder.STL" />
+          filename="package://my_robot_bringup/meshes/fr_shoulder.STL" />
       </geometry>
       <material
         name="">
@@ -251,7 +251,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fr_shoulder.STL" />
+          filename="package://my_robot_bringup/meshes/fr_shoulder.STL" />
       </geometry>
     </collision>
   </link>
@@ -295,7 +295,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fr_femur.STL" />
+          filename="package://my_robot_bringup/meshes/fr_femur.STL" />
       </geometry>
       <material
         name="">
@@ -309,7 +309,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fr_femur.STL" />
+          filename="package://my_robot_bringup/meshes/fr_femur.STL" />
       </geometry>
     </collision>
   </link>
@@ -353,7 +353,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fr_tibia.STL" />
+          filename="package://my_robot_bringup/meshes/fr_tibia.STL" />
       </geometry>
       <material
         name="">
@@ -367,7 +367,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/fr_tibia.STL" />
+          filename="package://my_robot_bringup/meshes/fr_tibia.STL" />
       </geometry>
     </collision>
   </link>
@@ -411,7 +411,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/bl_shoulder.STL" />
+          filename="package://my_robot_bringup/meshes/bl_shoulder.STL" />
       </geometry>
       <material
         name="">
@@ -425,7 +425,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/bl_shoulder.STL" />
+          filename="package://my_robot_bringup/meshes/bl_shoulder.STL" />
       </geometry>
     </collision>
   </link>
@@ -469,7 +469,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/bl_femur.STL" />
+          filename="package://my_robot_bringup/meshes/bl_femur.STL" />
       </geometry>
       <material
         name="">
@@ -483,7 +483,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/bl_femur.STL" />
+          filename="package://my_robot_bringup/meshes/bl_femur.STL" />
       </geometry>
     </collision>
   </link>
@@ -527,7 +527,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/bl_tibia.STL" />
+          filename="package://my_robot_bringup/meshes/bl_tibia.STL" />
       </geometry>
       <material
         name="">
@@ -541,7 +541,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/bl_tibia.STL" />
+          filename="package://my_robot_bringup/meshes/bl_tibia.STL" />
       </geometry>
     </collision>
   </link>
@@ -585,7 +585,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/br_shoulder.STL" />
+          filename="package://my_robot_bringup/meshes/br_shoulder.STL" />
       </geometry>
       <material
         name="">
@@ -599,7 +599,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/br_shoulder.STL" />
+          filename="package://my_robot_bringup/meshes/br_shoulder.STL" />
       </geometry>
     </collision>
   </link>
@@ -643,7 +643,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/br_femur.STL" />
+          filename="package://my_robot_bringup/meshes/br_femur.STL" />
       </geometry>
       <material
         name="">
@@ -657,7 +657,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/br_femur.STL" />
+          filename="package://my_robot_bringup/meshes/br_femur.STL" />
       </geometry>
     </collision>
   </link>
@@ -701,7 +701,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/br_tibia.STL" />
+          filename="package://my_robot_bringup/meshes/br_tibia.STL" />
       </geometry>
       <material
         name="">
@@ -715,7 +715,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://my_robot_description/meshes/br_tibia.STL" />
+          filename="package://my_robot_bringup/meshes/br_tibia.STL" />
       </geometry>
     </collision>
   </link>
@@ -730,7 +730,7 @@
     <child
       link="br_tibia" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       lower="-1.57"
       upper="1.57"
