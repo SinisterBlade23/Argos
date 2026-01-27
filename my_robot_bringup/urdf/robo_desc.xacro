@@ -498,7 +498,7 @@
     <child
       link="bl_femur" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       lower="-1.57"
       upper="1.57"
@@ -556,7 +556,7 @@
     <child
       link="bl_tibia" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       lower="-1.57"
       upper="1.57"

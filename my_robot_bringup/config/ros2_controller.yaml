@@ -1,7 +1,7 @@
 controller_manager:
   ros__parameters:
     update_rate: 50
-    use_sim_time: false
+    use_sim_time: true
     
     
     joint_state_broadcaster:
@@ -29,3 +29,5 @@ joint_position_controller:
       - br_femur_tibia
     
     interface_name: position
+    #ros2 topic pub --once /joint_position_controller/commands std_msgs/msg/Float64MultiArray
+    #"{data: [0.0, 1.0, 1.0, 0.0, -1.0, 1.0, 0.0, -1.0, -1.0, 0.0, -1.0, 1.0]}"

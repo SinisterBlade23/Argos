@@ -3,10 +3,7 @@
     
     <ros2_control name ="ARGOS" type = "system">
     <hardware>
-        <plugin>mock_components/GenericSystem</plugin>
-            <param name="mock_sensor_commands">false</param>
-            <param name="state_following">true</param>
-            <param name="position_state_following">true</param>
+        <plugin>gz_ros2_control/GazeboSimSystem</plugin>
     </hardware>
         <joint name="fl_base_shoulder">
             <command_interface name="position">
@@ -121,5 +118,10 @@
 
     </ros2_control>
 
+    <gazebo>
+        <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <parameters>$(find my_robot_bringup)/config/ros2_controller.yaml</parameters>
+        </plugin>
+    </gazebo>
 
 </robot>
