@@ -24,7 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'trot_gait = walk_pkg.trot_gait_node:main'
+            'walk_forward = walk_pkg.walk_forward_node:main'
         ],
     },
 )

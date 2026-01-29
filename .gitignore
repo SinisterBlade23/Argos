@@ -3,3 +3,5 @@
 .vscode/c_cpp_properties.json
 .vscode/browse.vc.db-wal
 .vscode/settings.json
+walk_pkg/walk_pkg/__pycache__/trot_gait_node.cpython-312.pyc
+walk_pkg/walk_pkg/__pycache__/__init__.cpython-312.pyc

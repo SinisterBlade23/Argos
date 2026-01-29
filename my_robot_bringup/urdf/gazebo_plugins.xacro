@@ -1,133 +1,43 @@
-<?x l version="1.0"?>
+<?xml version="1.0"?>
 <robot xmlns:xacro = "https://www.ros.org/wiki/xacro">
+<!-- Front Left Tibia Friction -->
+<gazebo reference="fl_tibia">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+</gazebo>
 
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>fl_base_shoulder</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>fl_shoulder_femur</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>fl_femur_tibia</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-state-publisher-system" 
-        name="gz::sim::systems::JointStatePublisher">
-        <joint_name>fl_base_shoulder</joint_name> 
-        <joint_name>fl_shoulder_femur</joint_name>
-        <joint_name>fl_femur_tibia</joint_name>
-        </plugin>
-    </gazebo>
+<!-- Front Right Tibia Friction -->
+<gazebo reference="fr_tibia">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+</gazebo>
 
+<!-- Back Left Tibia Friction -->
+<gazebo reference="bl_tibia">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+</gazebo>
 
-
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>fr_base_shoulder</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>fr_shoulder_femur</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>fr_femur_tibia</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-state-publisher-system" 
-        name="gz::sim::systems::JointStatePublisher">
-        <joint_name>fr_base_shoulder</joint_name> 
-        <joint_name>fr_shoulder_femur</joint_name>
-        <joint_name>fr_femur_tibia</joint_name>
-        </plugin>
-    </gazebo>
-
-
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>bl_base_shoulder</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>bl_shoulder_femur</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>bl_femur_tibia</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-state-publisher-system" 
-        name="gz::sim::systems::JointStatePublisher">
-        <joint_name>bl_base_shoulder</joint_name> 
-        <joint_name>bl_shoulder_femur</joint_name>
-        <joint_name>bl_femur_tibia</joint_name>
-        </plugin>
-    </gazebo>
-
-
-
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>br_base_shoulder</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>br_shoulder_femur</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-position-controller-system" 
-        name="gz::sim::systems::JointPositionController">
-        <joint_name>br_femur_tibia</joint_name> 
-        </plugin>
-    </gazebo>
-    <gazebo>
-        <plugin 
-        filename="gz-sim-joint-state-publisher-system" 
-        name="gz::sim::systems::JointStatePublisher">
-        <joint_name>br_base_shoulder</joint_name> 
-        <joint_name>br_shoulder_femur</joint_name>
-        <joint_name>br_femur_tibia</joint_name>
-        </plugin>
-    </gazebo> 
+<!-- Back Right Tibia Friction -->
+<gazebo reference="br_tibia">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+</gazebo>
 
 </robot>

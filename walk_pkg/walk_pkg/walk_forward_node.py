@@ -7,28 +7,32 @@ import numpy as np
 class InterpolatedPublisher(Node):
     def __init__(self):
         super().__init__('interpolated_publisher')
-        
         self.publisher = self.create_publisher(
             Float64MultiArray,
             '/joint_position_controller/commands',
             10
         )
         
+        # Default starting position (activated only on launch)
+        self.default_position = [0.0, 0.6, -0.10, 0.0, -0.6, -0.10, 0.0, -0.6, 0.10, 0.0, -0.6, -0.10]
+        
         # FL three key positions
         self.positions = [
-            [0.0, 1.2, 0.55, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-            [0.0, 0.8, 1.2,  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-            [0.0, 0.5, 0.25, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-        ]
+            [0.0, 0.2, 0.6, 0.0, -0.6, 0.10, 0.0, -0.6, 0.10, 0.0, -0.2, 0.6],  # FL+BR lift up
+            [0.0, -0.3, -0.35, 0.0, -0.2, -0.6, 0.0, -0.2, 0.6, 0.0, 0.3, -0.35],  # FL+BR swing forward, FR+BL on ground
+            [0.0, 0.6, -0.10, 0.0, 0.3, 0.35, 0.0, 0.3, -0.35, 0.0, -0.6, -0.10],  # FL+BR lower, FR+BL lift
+            ]
         
         # Parameters
         self.frequency = 100  # Hz - publishing rate
-        self.transition_time = 0.5 # seconds - time to move between positions
-        self.hold_time = 0.001  # seconds - time to hold at each position
+        self.transition_time = 0.2  # seconds - time to move between positions
+        self.hold_time = 0.03  # seconds - time to hold at each position
+        self.startup_transition_time = 0.5  # seconds - time to move from default to first position
         
         # State variables
+        self.is_startup = True  # Flag to indicate startup phase
         self.current_pos_idx = 0
-        self.next_pos_idx = 1
+        self.next_pos_idx = 0  # Start with first position after startup
         self.t = 0.0  # time within current transition
         self.phase = 'transition'  # 'transition' or 'hold'
         
@@ -38,6 +42,7 @@ class InterpolatedPublisher(Node):
         self.get_logger().info('Interpolated Publisher Started')
         self.get_logger().info(f'Publishing at {self.frequency} Hz')
         self.get_logger().info(f'Transition time: {self.transition_time}s, Hold time: {self.hold_time}s')
+        self.get_logger().info(f'Starting from default position, transitioning to position 1 in {self.startup_transition_time}s')
     
     def interpolate(self, pos1, pos2, t):
         """
@@ -56,7 +61,30 @@ class InterpolatedPublisher(Node):
     def timer_callback(self):
         dt = 1.0 / self.frequency
         
-        if self.phase == 'transition':
+        # Handle startup phase (default position to first position)
+        if self.is_startup:
+            # Calculate interpolation parameter (0.0 to 1.0)
+            alpha = self.t / self.startup_transition_time
+            
+            if alpha >= 1.0:
+                # Startup transition complete
+                self.is_startup = False
+                self.phase = 'hold'
+                self.t = 0.0
+                self.current_pos_idx = 0
+                self.next_pos_idx = 1
+                current_position = self.positions[0]
+                self.get_logger().info('Reached first position, starting normal operation')
+            else:
+                # Interpolate from default to first position
+                current_position = self.interpolate(
+                    self.default_position,
+                    self.positions[0],
+                    alpha
+                )
+        
+        # Normal operation (after startup)
+        elif self.phase == 'transition':
             # Calculate interpolation parameter (0.0 to 1.0)
             alpha = self.t / self.transition_time
             
@@ -82,7 +110,6 @@ class InterpolatedPublisher(Node):
                 self.t = 0.0
                 self.current_pos_idx = self.next_pos_idx
                 self.next_pos_idx = (self.next_pos_idx + 1) % len(self.positions)
-                
                 self.get_logger().info(
                     f'Moving to position {self.next_pos_idx + 1}'
                 )
@@ -98,7 +125,6 @@ class InterpolatedPublisher(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = InterpolatedPublisher()
-    
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
