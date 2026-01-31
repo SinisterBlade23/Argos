@@ -5,6 +5,7 @@
     <xacro:include filename="robo_desc.xacro" />
     <xacro:include filename="gazebo_plugins.xacro"/> 
     <xacro:include filename="ros2_control_plugins.xacro"/>
+    <xacro:include filename="imu_sensor.xacro"/>
 
 
 </robot>

@@ -2,25 +2,36 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import String
 import numpy as np
 
 class InterpolatedPublisher(Node):
     def __init__(self):
+
         super().__init__('interpolated_publisher')
+
+
         self.publisher = self.create_publisher(
             Float64MultiArray,
             '/joint_position_controller/commands',
             10
         )
+
+        self.cmd_sub = self.create_subscription(
+            String,
+            'motion_cmd',
+            self.cmd_callback,
+            10            
+        )
         
         # Default starting position (activated only on launch)
         self.default_position = [0.0, 0.6, -0.10, 0.0, -0.6, -0.10, 0.0, -0.6, 0.10, 0.0, -0.6, -0.10]
         
-        # FL three key positions
+        # FL three key positions FL FR BL BR
         self.positions = [
-            [0.0, 0.2, 0.6, 0.0, -0.6, 0.10, 0.0, -0.6, 0.10, 0.0, -0.2, 0.6],  # FL+BR lift up
-            [0.0, -0.3, -0.35, 0.0, -0.2, -0.6, 0.0, -0.2, 0.6, 0.0, 0.3, -0.35],  # FL+BR swing forward, FR+BL on ground
-            [0.0, 0.6, -0.10, 0.0, 0.3, 0.35, 0.0, 0.3, -0.35, 0.0, -0.6, -0.10],  # FL+BR lower, FR+BL lift
+            [0.0, 0.2, 0.6, 0.0, -0.6, -0.10, 0.0, -0.6, 0.10, 0.0, -0.6, 0.6],     # FL+BR lift up
+            [0.0, -0.3, -0.35, 0.0, -0.2, 0.6, 0.0, -0.6, -0.6, 0.0, -0.6, -0.35],  # FL+BR swing forward
+            [0.0, 0.6, -0.10, 0.0, 0.3, -0.35, 0.0, -0.6, 0.35, 0.0, -0.6, 0.10],   # FL+BR lower, FR+BL lift
             ]
         
         # Parameters
@@ -36,6 +47,9 @@ class InterpolatedPublisher(Node):
         self.t = 0.0  # time within current transition
         self.phase = 'transition'  # 'transition' or 'hold'
         
+        self.startup_done = False 
+        self.current_cmd = 'idle'
+
         # Create timer
         self.timer = self.create_timer(1.0 / self.frequency, self.timer_callback)
         
@@ -44,6 +58,21 @@ class InterpolatedPublisher(Node):
         self.get_logger().info(f'Transition time: {self.transition_time}s, Hold time: {self.hold_time}s')
         self.get_logger().info(f'Starting from default position, transitioning to position 1 in {self.startup_transition_time}s')
     
+    def cmd_callback(self, msg):
+        cmd = msg.data.strip().lower()
+        if cmd == 'forward':
+            if self.current_cmd != 'forward':
+                self.current_cmd = 'forward'
+                if self.startup_done:
+                    self.phase = 'transition'
+                    self.t = 0.0
+                self.get_logger().info('walk FORWARD')
+        else:
+            # Any other command stops the robot
+            if self.current_cmd != 'idle':
+                self.current_cmd = 'idle'
+                self.get_logger().info(f'Received "{cmd}", stopping')
+
     def interpolate(self, pos1, pos2, t):
         """
         Smooth interpolation using cubic easing
@@ -63,29 +92,38 @@ class InterpolatedPublisher(Node):
         
         # Handle startup phase (default position to first position)
         if self.is_startup:
-            # Calculate interpolation parameter (0.0 to 1.0)
             alpha = self.t / self.startup_transition_time
             
             if alpha >= 1.0:
                 # Startup transition complete
                 self.is_startup = False
+                self.startup_done = True
                 self.phase = 'hold'
                 self.t = 0.0
                 self.current_pos_idx = 0
                 self.next_pos_idx = 1
                 current_position = self.positions[0]
-                self.get_logger().info('Reached first position, starting normal operation')
+                self.get_logger().info('Reached first position, waiting for command...')
             else:
-                # Interpolate from default to first position
                 current_position = self.interpolate(
                     self.default_position,
                     self.positions[0],
                     alpha
                 )
+            
+            # Publish and increment during startup, then return
+            msg = Float64MultiArray()
+            msg.data = current_position
+            self.publisher.publish(msg)
+            self.t += dt
+            return
         
-        # Normal operation (after startup)
-        elif self.phase == 'transition':
-            # Calculate interpolation parameter (0.0 to 1.0)
+        # After startup: hold if command is not 'forward'
+        if self.current_cmd != 'forward':
+            return
+        
+        # Walking forward (command is 'forward')
+        if self.phase == 'transition':
             alpha = self.t / self.transition_time
             
             if alpha >= 1.0:
@@ -94,7 +132,6 @@ class InterpolatedPublisher(Node):
                 self.t = 0.0
                 current_position = self.positions[self.next_pos_idx]
             else:
-                # Interpolate between positions
                 current_position = self.interpolate(
                     self.positions[self.current_pos_idx],
                     self.positions[self.next_pos_idx],
