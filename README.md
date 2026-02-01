@@ -64,3 +64,7 @@ This design enforces separation of input, gait logic, and pose output, which is 
 - Improve gait
 
 
+<img width="1055" height="813" alt="image" src="https://github.com/user-attachments/assets/fd015b97-8cb4-4ac0-bec0-9a52203cc29c" />
+<img width="820" height="577" alt="image" src="https://github.com/user-attachments/assets/f5c457df-89c2-4250-996a-80ddfb536400" />
+
+
