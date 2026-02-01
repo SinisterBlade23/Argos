@@ -25,13 +25,13 @@ class InterpolatedPublisher(Node):
         )
         
         # Default starting position (activated only on launch)
-        self.default_position = [0.0, 0.6, -0.10, 0.0, -0.6, -0.10, 0.0, -0.6, 0.10, 0.0, -0.6, -0.10]
+        self.default_position = [0.0, 0.8, -0.10, 0.0, -0.8, -0.10, 0.0, -0.6, 0.10, 0.0, -0.6, -0.10]
         
-        # FL three key positions FL FR BL BR
+  
         self.positions = [
-            [0.0, 0.2, 0.6, 0.0, -0.6, -0.10, 0.0, -0.7, 0.10, 0.0, -0.7, 0.6],     # FL+BR lift up
-            [0.0, -0.3, -0.35, 0.0, -0.2, 0.6, 0.0, -0.7, -0.6, 0.0, -0.7, -0.35],  # FL+BR swing forward
-            [0.0, 0.6, -0.10, 0.0, 0.3, -0.35, 0.0, -0.7, 0.35, 0.0, -0.7, 0.10],   # FL+BR lower, FR+BL lift
+            [0.0, 0.8, 0.20, 0.0, -0.8, 0.0, 0.0, 0.2, 0.6, 0.0, -0.60, -0.10],     # FL+BR lift up
+            [0.0, 0.8, 0.00, 0.0, -0.8, 0.35, 0.0, -0.3, -0.35, 0.0, -0.2, -0.6],  # FL+BR swing backward
+            [0.0, 0.8, 0.35, 0.0, -0.8, 0.20, 0.0, -0.6, 0.10, 0.0, -0.3, 0.35],   # FL+BR lower, FR+BL lift
             ]
         
         # Parameters
@@ -60,13 +60,13 @@ class InterpolatedPublisher(Node):
     
     def cmd_callback(self, msg):
         cmd = msg.data.strip().lower()
-        if cmd == 'forward':
-            if self.current_cmd != 'forward':
-                self.current_cmd = 'forward'
+        if cmd == 'backward':
+            if self.current_cmd != 'backward':
+                self.current_cmd = 'backward'
                 if self.startup_done:
                     self.phase = 'transition'
                     self.t = 0.0
-                self.get_logger().info('walk FORWARD')
+                self.get_logger().info('walk backward')
         else:
             # Any other command stops the robot
             if self.current_cmd != 'idle':
@@ -118,11 +118,11 @@ class InterpolatedPublisher(Node):
             self.t += dt
             return
         
-        # After startup: hold if command is not 'forward'
-        if self.current_cmd != 'forward':
+        # After startup: hold if command is not 'backward'
+        if self.current_cmd != 'backward':
             return
         
-        # Walking forward (command is 'forward')
+        # Walking backward (command is 'backward')
         if self.phase == 'transition':
             alpha = self.t / self.transition_time
             
@@ -147,7 +147,7 @@ class InterpolatedPublisher(Node):
                 self.t = 0.0
                 self.current_pos_idx = self.next_pos_idx
                 self.next_pos_idx = (self.next_pos_idx + 1) % len(self.positions)
-                self.get_logger().info(
+                self.get_logger().  info(
                     f'Moving to position {self.next_pos_idx + 1}'
                 )
         

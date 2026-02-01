@@ -1,10 +1,11 @@
 <launch>
+    <!-- Path Variables -->
     <let name="urdf_path" 
-        value="$(find-pkg-share my_robot_bringup)/urdf/SimAssemb.urdf.xacro" />
+         value="$(find-pkg-share my_robot_bringup)/urdf/SimAssemb.urdf.xacro" />
     <let name="gazebo_config_path" 
-        value="$(find-pkg-share my_robot_bringup)/config/gazebo_bridge.yaml" />
+         value="$(find-pkg-share my_robot_bringup)/config/gazebo_bridge.yaml" />
     <let name="controllers_config_path"
-        value="$(find-pkg-share my_robot_bringup)/config/ros2_controller.yaml" />
+         value="$(find-pkg-share my_robot_bringup)/config/ros2_controller.yaml" />
     
     <!-- Robot State Publisher -->
     <node pkg="robot_state_publisher" exec="robot_state_publisher" output="screen">
@@ -22,7 +23,7 @@
     
     <!-- Spawn Robot -->
     <node pkg="ros_gz_sim" exec="create" output="screen"
-        args="-topic robot_description -name my_robot -z 0.2"/>
+          args="-topic robot_description -name my_robot -z 0.2"/>
     
     <!-- ROS-Gazebo Bridge -->
     <node pkg="ros_gz_bridge" exec="parameter_bridge" output="screen">
@@ -30,22 +31,51 @@
         <param name="use_sim_time" value="true"/>
     </node>
     
-    <!-- Controller Spawners with Delays -->
-    <!-- Joint State Broadcaster - starts after 5 seconds -->
+    <!-- Controller Spawners -->
+    <!-- Joint State Broadcaster -->
     <node pkg="controller_manager" exec="spawner" output="screen"
-        args="joint_state_broadcaster --controller-manager /controller_manager">
+          args="joint_state_broadcaster --controller-manager /controller_manager">
         <param name="use_sim_time" value="true"/>
     </node>
     
-    <!-- Joint Position Controller - starts after 8 seconds -->
+    <!-- Joint Position Controller -->
     <node pkg="controller_manager" exec="spawner" output="screen"
-        args="joint_position_controller --controller-manager /controller_manager">
+          args="joint_position_controller --controller-manager /controller_manager">
         <param name="use_sim_time" value="true"/>
     </node>
     
     <!-- RViz -->
     <node pkg="rviz2" exec="rviz2" output="screen"
-        args="-d /home/rushil/quadruped_ws/src/urdf_config.rviz">
+          args="-d /home/rushil/quadruped_ws/src/urdf_config.rviz">
         <param name="use_sim_time" value="true"/>
     </node>
+    
+    <!-- ========== MOTION CONTROL NODES ========== -->
+    
+    <!-- Forward Walk Node -->
+    <node pkg="walk_pkg" exec="forward_walk" output="screen">
+        <param name="use_sim_time" value="true"/>
+    </node>
+    
+    <!-- Backward Walk Node -->
+    <node pkg="walk_pkg" exec="backward_walk" output="screen">
+        <param name="use_sim_time" value="true"/>
+    </node>
+    
+    <!-- Idle/Default Position Node -->
+    <node pkg="walk_pkg" exec="idle" output="screen">
+        <param name="use_sim_time" value="true"/>
+    </node>
+    
+    <!-- Jump Node -->
+    <node pkg="walk_pkg" exec="jump" output="screen">
+        <param name="use_sim_time" value="true"/>
+    </node>
+    
+    <!-- Robot Control (CLI) - Separate Terminal Window -->
+    <node pkg="walk_pkg" exec="robot_control" output="screen"
+          launch-prefix="gnome-terminal --title='Robot Control CLI' -- ">
+        <param name="use_sim_time" value="true"/>
+    </node>
+    
 </launch>

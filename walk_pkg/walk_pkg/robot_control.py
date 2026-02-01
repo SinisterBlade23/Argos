@@ -33,6 +33,8 @@ class KeyboardWASD(Node):
                 msg.data = 'left'
             elif key == 'd':
                 msg.data = 'right'
+            elif key == ' ':
+                msg.data = 'jump'
             elif key == 'x':
                 msg.data = 'stop'
             elif key == 'q':

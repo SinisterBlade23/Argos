@@ -2,8 +2,8 @@
 <robot xmlns:xacro = "https://www.ros.org/wiki/xacro">
 <!-- Front Left Tibia Friction -->
 <gazebo reference="fl_tibia">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu1>3.0</mu1>
+    <mu2>3.0</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
@@ -12,8 +12,8 @@
 
 <!-- Front Right Tibia Friction -->
 <gazebo reference="fr_tibia">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu1>3.0</mu1>
+    <mu2>3.0</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
@@ -22,8 +22,8 @@
 
 <!-- Back Left Tibia Friction -->
 <gazebo reference="bl_tibia">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu1>3.0</mu1>
+    <mu2>3.0</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
@@ -32,8 +32,8 @@
 
 <!-- Back Right Tibia Friction -->
 <gazebo reference="br_tibia">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu1>3.0</mu1>
+    <mu2>3.0</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>

@@ -24,9 +24,11 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'walk_forward = walk_pkg.walk_forward_node:main',
+            'forward_walk = walk_pkg.walk_forward_node:main',
             'idle = walk_pkg.default_position_node:main',
-            'robot_control = walk_pkg.robot_control:main'
+            'robot_control = walk_pkg.robot_control:main',
+            'backward_walk = walk_pkg.walk_backward_node:main',
+            'jump = walk_pkg.jump_node:main'
         ],
     },
 )
