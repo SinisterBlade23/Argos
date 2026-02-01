@@ -36,11 +36,11 @@ class InterpolatedPublisher(Node):
         
         # Parameters
         self.frequency = 100  # Hz - publishing rate
-        self.transition_time = 0.2  # seconds - time to move between positions
-        self.hold_time = 0.03  # seconds - time to hold at each position
-        self.startup_transition_time = 0.5  # seconds - time to move from default to first position
+        self.transition_time = 0.2  #  time to move between positions
+        self.hold_time = 0.03  # time to hold at each position
+        self.startup_transition_time = 0.5  # time to move from default to first position
         
-        # State variables
+        
         self.is_startup = True  # Flag to indicate startup phase
         self.current_pos_idx = 0
         self.next_pos_idx = 0  # Start with first position after startup
@@ -68,34 +68,29 @@ class InterpolatedPublisher(Node):
                     self.t = 0.0
                 self.get_logger().info('walk backward')
         else:
-            # Any other command stops the robot
+            
             if self.current_cmd != 'idle':
                 self.current_cmd = 'idle'
                 self.get_logger().info(f'Received "{cmd}", stopping')
 
     def interpolate(self, pos1, pos2, t):
-        """
-        Smooth interpolation using cubic easing
-        t: 0.0 to 1.0
-        """
-        # Cubic ease-in-out for smoother motion
         if t < 0.5:
             eased_t = 4 * t * t * t
         else:
             eased_t = 1 - pow(-2 * t + 2, 3) / 2
         
-        # Linear interpolation with easing
+        
         return [p1 + (p2 - p1) * eased_t for p1, p2 in zip(pos1, pos2)]
     
     def timer_callback(self):
         dt = 1.0 / self.frequency
         
-        # Handle startup phase (default position to first position)
+        
         if self.is_startup:
             alpha = self.t / self.startup_transition_time
             
             if alpha >= 1.0:
-                # Startup transition complete
+               
                 self.is_startup = False
                 self.startup_done = True
                 self.phase = 'hold'
@@ -111,23 +106,21 @@ class InterpolatedPublisher(Node):
                     alpha
                 )
             
-            # Publish and increment during startup, then return
+            
             msg = Float64MultiArray()
             msg.data = current_position
             self.publisher.publish(msg)
             self.t += dt
             return
         
-        # After startup: hold if command is not 'backward'
+       
         if self.current_cmd != 'backward':
             return
         
-        # Walking backward (command is 'backward')
         if self.phase == 'transition':
             alpha = self.t / self.transition_time
             
-            if alpha >= 1.0:
-                # Transition complete, start hold phase
+            if alpha >= 1.0:                
                 self.phase = 'hold'
                 self.t = 0.0
                 current_position = self.positions[self.next_pos_idx]
@@ -138,11 +131,10 @@ class InterpolatedPublisher(Node):
                     alpha
                 )
         
-        else:  # hold phase
+        else:  
             current_position = self.positions[self.next_pos_idx]
             
-            if self.t >= self.hold_time:
-                # Hold complete, start next transition
+            if self.t >= self.hold_time:                
                 self.phase = 'transition'
                 self.t = 0.0
                 self.current_pos_idx = self.next_pos_idx
@@ -151,12 +143,12 @@ class InterpolatedPublisher(Node):
                     f'Moving to position {self.next_pos_idx + 1}'
                 )
         
-        # Publish the position
+        
         msg = Float64MultiArray()
         msg.data = current_position
         self.publisher.publish(msg)
         
-        # Increment time
+        
         self.t += dt
 
 def main(args=None):
